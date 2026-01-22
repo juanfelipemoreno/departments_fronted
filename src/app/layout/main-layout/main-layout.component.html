@@ -1,0 +1,23 @@
+<mat-sidenav-container class="layout-container">
+
+  <mat-sidenav mode="side" opened class="sidebar">
+    <h2 class="logo">Super</h2>
+
+    <button mat-button routerLink="/departments" routerLinkActive="active">
+      Departamentos
+    </button>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-toolbar color="primary">
+      <span>Gestión de Departamentos</span>
+    </mat-toolbar>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
