@@ -1,51 +1,94 @@
-<div class="card">
-  <div class="card-header">
-    <div class="content-left">
-    <div class="search-box">
+<div class="list-container">
+  <div class="search-bar">
+    <div class="search-input">
       <span class="search-icon">🔍</span>
-      <input 
-        type="text" 
-        placeholder="Search" 
-      />
+      <input type="text" placeholder="Search">
     </div>
-    <button class="btn-primary">New</button>
-    </div>
-    <div>
-      <div class="content-right">
-        <button class="icon-btn">⊞</button>
-        <button class="icon-btn">⬇</button>
-        <button class="icon-btn">🖨</button>
-      </div>
-    </div>
+    <button class="btn-create" (click)="openCreateModal()">
+      Crear <span>+</span>
+    </button>
   </div>
 
-  <table>
+  <table class="data-table">
     <thead>
       <tr>
-        <th>Codigo</th>
-        <th>Nombre</th>
-        <th>Estado</th>
+        <th>
+          Departamento <span class="sort-icon">↕</span>
+        </th>
+        <th>
+          Nombre <span class="sort-icon">↕</span>
+        </th>
         <th>Opciones</th>
       </tr>
     </thead>
-
     <tbody>
-      <tr *ngFor="let department of departments">
-        <td>{{ department.code }}</td>
-        <td>{{ department.name }}</td>
+      <tr *ngFor="let dept of departments">
+        <td>{{dept.code}}</td>
+        <td>{{dept.name}}</td>
+        <td>{{ dept.status ? 'Activo' : 'Inactivo' }}</td>
         <td>
-          <span
-            class="badge"
-            [class.active]="department.status"
-            [class.inactive]="!department.status">
-            {{ department.status ? 'Activo' : 'Inactivo' }}
-          </span>
-        </td>
-        <td>
-          <button class="btn-edit" routerLink="/departments/create">✏</button>
-          <button class="btn-delete" [routerLink]="['/departments/edit', department.id]">🗑</button>
+          <button class="btn-edit" (click)="openEditModal(dept)">✏</button>
+          <button class="btn-delete" (click)="deleteDepartment(dept.id)">🗑</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <div class="pagination">
+    <div class="pagination-info">
+      <label>Cantidad</label>
+      <select >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+      <span>1 de 3</span>
+    </div>
+    <div class="pagination-controls">
+      <button>⟨⟨</button>
+      <button>⟨</button>
+      <button>⟩</button>
+      <button>⟩⟩</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Departamentos</h3>
+      <button class="btn-close" (click)="closeModal()">✕</button>
+    </div>
+    
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Departamento</label>
+            <div class="input-with-icon">
+              <span class="icon">#</span>
+              <input type="text" formControlName="code" placeholder="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Nombre Departamento</label>
+            <div class="input-with-icon">
+              <span class="icon">📋</span>
+              <input type="text" formControlName="name" placeholder="Departamento">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" (click)="closeModal()">
+          Cancelar ✕
+        </button>
+        <button type="submit" class="btn-save" [disabled]="form.invalid">
+          Guardar 💾
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

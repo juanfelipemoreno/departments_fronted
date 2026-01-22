@@ -1,23 +1,54 @@
-<mat-sidenav-container class="layout-container">
+<div class="app-container">
+  <aside class="sidebar">
+    <div class="logo">
+      <h3>Gin 360</h3>
+      <p>Gestión Integral</p>
+    </div>
 
-  <mat-sidenav mode="side" opened class="sidebar">
-    <h2 class="logo">Super</h2>
+    <nav class="menu">
+      <div class="menu-item" routerLink="/departments" routerLinkActive="active">
+        <span class="icon">📊</span>
+        <div>
+          <div class="menu-title">Gestión Maestros</div>
+          <div class="menu-subtitle">Maestros Departamentos</div>
+        </div>
+      </div>
+    </nav>
+  </aside>
 
-    <button mat-button routerLink="/departments" routerLinkActive="active">
-      Departamentos
-    </button>
-  </mat-sidenav>
+  <div class="main-content">
+    <header class="header">
+      <div class="header-left">
+        <button class="menu-toggle">☰</button>
+        <div class="breadcrumb">
+          <span>Procesos Generales</span>
+          <span class="separator">›</span>
+          <span class="current">Departamentos</span>
+        </div>
+      </div>
 
-  <mat-sidenav-content>
-
-    <mat-toolbar color="primary">
-      <span>Gestión de Departamentos</span>
-    </mat-toolbar>
+      <div class="header-right">
+        <span class="date">Fecha sistema: 2025-01-22</span>
+        <button class="home-btn">
+          <span>🏠</span> Home
+        </button>
+        <div class="user-info">
+          <div class="avatar"></div>
+          <span>Jason Romero</span>
+        </div>
+      </div>
+    </header>
 
     <div class="content">
       <router-outlet></router-outlet>
     </div>
 
-  </mat-sidenav-content>
-
-</mat-sidenav-container>
+    <footer class="footer">
+      <span>© 2025 GIN 360 - Todos los derechos reservados</span>
+      <div class="footer-right">
+        <span>🌐</span>
+        <button class="lang-btn">Español ›</button>
+      </div>
+    </footer>
+  </div>
+</div>
